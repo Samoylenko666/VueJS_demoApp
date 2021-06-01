@@ -15,19 +15,28 @@
           <li class="nav-item">
             <router-link
               class="nav-link"
-              :to="{ name: 'globalFeed', params: { slug: currentUser.username } }"
+              :to="{
+                name: 'createArticle',
+                params: { slug: currentUser.username },
+              }"
             >
               <i class="ion-compose"> &nbsp; NewArtilce </i>
             </router-link>
           </li>
 
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'globalFeed' }">
+            <router-link class="nav-link" :to="{ name: 'settings' }">
               <i class="ion-gear-a"> &nbsp; Settings </i>
             </router-link>
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'globalFeed' }">
+            <router-link
+              class="nav-link"
+              :to="{
+                name: 'userProfile',
+                params: { slug: currentUser.username },
+              }"
+            >
               <img class="user-pic" :src="currentUser.image" /> &nbsp;
               {{ currentUser.username }}
             </router-link>

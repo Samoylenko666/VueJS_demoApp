@@ -1,5 +1,5 @@
 <template>
-  <div>Register page</div>
+
 
   <div class="auth-page">
     <div class="container Page">

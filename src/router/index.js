@@ -4,6 +4,11 @@ import AppYourFeed from "@/views/YourFeed.vue";
 import AppTagFeed from "@/views/TagFeed.vue";
 import AppRegister from "@/views/Register.vue";
 import AppLogin from "@/views/Login.vue";
+import AppArticle from "@/views/Article.vue";
+import AppCreateArticle from "@/views/CreateArticle.vue";
+import AppEditArticle from "@/views/EditArticle.vue";
+import AppSettings from "@/views/Settings.vue";
+import AppUserProfile from "@/views/UserProfile.vue";
 
 const routes = [
   {
@@ -32,34 +37,34 @@ const routes = [
     component: AppTagFeed,
   },
   {
-    path: "/Profiles/:slug/favorites",
+    path: "/profiles/:slug/favorites",
     name: "userProfileFavorites",
-    component: GlobalFeed,
+    component: AppUserProfile,
   },
   {
-    path: "/Profiles/:slug",
+    path: "/profiles/:slug",
     name: "userProfile",
-    component: GlobalFeed,
+    component: AppUserProfile ,
   },
   {
     path: "/articles/new",
     name: "createArticle",
-    component: GlobalFeed,
+    component: AppCreateArticle,
   },
   {
     path: "/articles/:slug",
     name: "article",
-    component: GlobalFeed,
+    component: AppArticle,
   },
   {
     path: "/articles/:slug/edit",
     name: "editArticle",
-    component: GlobalFeed,
+    component: AppEditArticle,
   },
   {
     path: "/settings",
     name: "settings",
-    component: GlobalFeed,
+    component: AppSettings,
   },
 ];
 

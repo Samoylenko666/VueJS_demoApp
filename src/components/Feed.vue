@@ -32,7 +32,11 @@
           </div>
 
           <div class="pull-xs-right">
-            ADD favorites
+            <AppAddToFavorites
+              :isFavorited="article.favorited"
+              :articleSlug="article.slug"
+              :favoritesCount="article.favoritesCount"
+            />
           </div>
         </div>
 
@@ -43,7 +47,7 @@
           <h1>{{ article.title }}</h1>
           <p>{{ article.description }}</p>
           <span> Read more..</span>
-          TAG LIST
+          <AppTagList :tags="article.tagList" />
         </router-link>
       </div>
 
@@ -64,7 +68,9 @@ import { limit } from "@/helpers/vars.js";
 import AppPagination from "@/components/Pagination";
 import { stringify, parseUrl } from "query-string";
 import AppLoading from "@/components/Loading.vue";
+import AppTagList from "@/components/TagList.vue";
 import AppErrorMessage from "@/components/ErrorMessage.vue";
+import AppAddToFavorites from "@/components/AddToFavorites.vue";
 export default {
   name: "AppFeed",
   props: {
@@ -77,6 +83,8 @@ export default {
     AppPagination,
     AppLoading,
     AppErrorMessage,
+    AppTagList,
+    AppAddToFavorites,
   },
   data() {
     return {
@@ -101,6 +109,9 @@ export default {
   },
   watch: {
     currentPage() {
+      this.fetchFeed();
+    },
+    apiUrl() {
       this.fetchFeed();
     },
   },

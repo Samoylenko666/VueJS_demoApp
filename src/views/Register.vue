@@ -1,6 +1,4 @@
 <template>
-  <div>Register page</div>
-
   <div class="auth-page">
     <div class="container Page">
       <div class="row">
@@ -10,7 +8,7 @@
           </h1>
           <p class="text-xs-center">
             <router-link :to="{ name: 'login' }">
-             Have an account?
+              Have an account?
             </router-link>
           </p>
 
@@ -58,7 +56,7 @@
 
 <script>
 import AppValidationErrors from "@/components/ValidationErrors.vue";
-import  {actionTypes} from '@/store/modules/auth.js'
+import { actionTypes } from "@/store/modules/auth.js";
 export default {
   name: "AppRegister",
   components: {

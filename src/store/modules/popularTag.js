@@ -7,8 +7,8 @@ const state = {
 
 export const mutationTypes = {
   getPopularTagStart: "[PopularTag] Get PopularTag start",
-  getPopularTagSuccess: "[PopularTag] Get PopularTagsuccess",
-  getPopularTagdFailed: "[PopularTag] Get PopularTag failed",
+  getPopularTagSuccess: "[PopularTag] Get PopularTag success",
+  getPopularTagFailed: "[PopularTag] Get PopularTag failed",
 };
 
 export const actionTypes = {
@@ -25,7 +25,6 @@ const mutations = {
     state.isLoading = false;
     state.data = payload;
   },
-
   [mutationTypes.getPopularTagFailed](state) {
     state.isLoading = false;
   },
@@ -35,7 +34,8 @@ const actions = {
   [actionTypes.getPopularTag](context) {
     return new Promise((resolve) => {
       context.commit(mutationTypes.getPopularTagStart);
-      popularTagApi.getPopularTag()
+      popularTagApi
+        .getPopularTag()
         .then((tags) => {
           context.commit(mutationTypes.getPopularTagSuccess, tags);
           resolve(tags);

@@ -12,6 +12,7 @@ export const mutationTypes = {
   registerStart: "[auth] registerStart",
   registerSuccess: "[auth] registerSuccess",
   registerFailed: "[auth] registerFailed",
+
   loginStart: "[auth] loginStart",
   loginSuccess: "[auth] loginSuccess",
   loginFailed: "[auth] loginFailed",
@@ -19,11 +20,19 @@ export const mutationTypes = {
   getCurrentUserStart: "[auth] getCurrentUserStart",
   getCurrentUserSuccess: "[auth] getCurrentUserSuccess",
   getCurrentUserFailed: "[auth] getCurrentUserFailed",
+
+  updateCurrentUserStart: "[auth] updateCurrentUserStart",
+  updateCurrentUserSuccess: "[auth] updateCurrentUserSuccess",
+  updateCurrentUserFailed: "[auth] updateCurrentUserFailed",
+
+  logoutCurrentUser: "[auth] logoutCurrentUser",
 };
 export const actionTypes = {
   register: "[auth] register",
   login: "[auth] login",
   getCurrentUser: "[auth] getCurrentUser",
+  updateCurrentUser: "[auth] updateCurrentUser",
+  logoutCurrentUser: "[auth] logoutCurrentUser",
 };
 
 export const getterTypes = {
@@ -85,6 +94,17 @@ const mutations = {
     state.isLoading = false;
     state.currentUser = null;
   },
+
+  [mutationTypes.updateCurrentUserStart]() {},
+  [mutationTypes.updateCurrentUserFailed]() {},
+  [mutationTypes.updateCurrentUserSuccess](state, payload) {
+    state.currentUser = payload;
+  },
+
+  [mutationTypes.logoutCurrentUser](state) {
+    state.currentUser = null;
+    state.isLoggedIn = false;
+  },
 };
 const actions = {
   [actionTypes.register](context, credentials) {
@@ -145,6 +165,37 @@ const actions = {
         });
     });
   },
+
+  [actionTypes.updateCurrentUser](context, { currentUserInput }) {
+    return new Promise((resolve) => {
+      context.commit(mutationTypes.updateCurrentUserStart);
+      auhtApi
+        .updateCurrentUser(currentUserInput)
+        .then((user) => {
+          context.commit(mutationTypes.updateCurrentUserSuccess, user);
+
+          resolve(user);
+        })
+        .catch((res) => {
+          context.commit(
+            mutationTypes.updateCurrentUserFailed,
+            res.response.data.errors
+          );
+        });
+    });
+  },
+
+
+
+  [actionTypes.logoutCurrentUser](context ) {
+    return new Promise((resolve) => {
+     setItem('accessToken', '')
+     context.commit(mutationTypes.logoutCurrentUser)
+     resolve()
+    });
+  },
+
+
 };
 export default {
   state,
